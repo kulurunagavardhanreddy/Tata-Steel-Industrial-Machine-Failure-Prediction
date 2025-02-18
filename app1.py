@@ -7,9 +7,9 @@ import pandas as pd
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 
 # Load models, scaler, and encoder (WITH PATHS)
-model_path = r"C:\Users\nag15\OneDrive\Desktop\speech_to_text_app\best_xgb_model.pkl"  # Correct Path
-scaler_path = r"C:\Users\nag15\OneDrive\Desktop\speech_to_text_app\scaler.pkl"      # Correct Path
-encoder_path = r"C:\Users\nag15\OneDrive\Desktop\speech_to_text_app\onehot_encoder.pkl" # Correct Path
+model_path = r"\best_xgb_model.pkl"  
+scaler_path = r"\scaler.pkl"      
+encoder_path = r"\onehot_encoder.pkl" 
 
 
 # Load models, scaler, and encoder
@@ -22,13 +22,13 @@ with open('onehot_encoder.pkl', 'rb') as encoder_file:
 
 st.title("Machine Failure Prediction")
 
-# Input fields (as before)
+# Input fields 
 air_temp = st.number_input("Air Temperature [K]", value=30.0)
 process_temp = st.number_input("Process Temperature [K]", value=40.0)
 rot_speed = st.number_input("Rotational Speed [rpm]", value=3000)
 torque = st.number_input("Torque [Nm]", value=50.0)
 tool_wear = st.number_input("Tool Wear [min]", value=100)
-twf = st.number_input("TWF", value=0, min_value=0, max_value=1)  # Corrected input type
+twf = st.number_input("TWF", value=0, min_value=0, max_value=1)  
 hdf = st.number_input("HDF", value=0, min_value=0, max_value=1)
 pwf = st.number_input("PWF", value=0, min_value=0, max_value=1)
 osf = st.number_input("OSF", value=0, min_value=0, max_value=1)
@@ -58,7 +58,7 @@ scaled_features = scaler.transform(features)
 
 if st.button("Predict"):
     prediction_proba = best_model.predict_proba(scaled_features)[:, 1]
-    prediction = (prediction_proba > 0.3).astype(int)  # You might want to adjust this threshold
+    prediction = (prediction_proba > 0.3).astype(int)  
 
     if prediction == 1:
         st.write("Prediction: Machine Failure (1)")
