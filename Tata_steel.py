@@ -17,9 +17,9 @@ import pickle
 warnings.filterwarnings('ignore')
 
 # Load dataset
-df = pd.read_csv(r"C:\Users\nag15\Downloads\combined_data.csv")  # Replace with your actual path
+df = pd.read_csv(r"combined_data.csv")  
 
-# Data preprocessing function (unchanged)
+# Data preprocessing function 
 def preprocess_data(df):
     df = df.drop_duplicates()
     df['Machine failure'] = df['Machine failure'].fillna(0).astype(int)
@@ -28,7 +28,7 @@ def preprocess_data(df):
 # Apply preprocessing
 df = preprocess_data(df).reset_index(drop=True)
 
-# Feature engineering function (unchanged)
+# Feature engineering function 
 def feature_engineering(df):
     df['Temp_Diff'] = df['Process temperature [K]'] - df['Air temperature [K]']
     df['Power Consumption'] = df['Torque [Nm]'] * df['Rotational speed [rpm]']
@@ -38,7 +38,7 @@ def feature_engineering(df):
 # Apply feature engineering
 df = feature_engineering(df)
 
-# Check class imbalance (unchanged)
+# Check class imbalance 
 def check_imbalance(df):
     plt.figure(figsize=(6, 4))
     ax = sns.countplot(x=df["Machine failure"])
@@ -74,7 +74,7 @@ feature_names = X.columns  # Store feature names
 scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X_imputed)
 
-# Split data (stratified)
+# Split data 
 X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.2, random_state=42, stratify=y)
 
 # --- Improved Model Training ---
@@ -182,3 +182,4 @@ plt.ylabel('True Positive Rate')
 plt.title('ROC Curve')
 plt.legend(loc='best')
 plt.show()
+
